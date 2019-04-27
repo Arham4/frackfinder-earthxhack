@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frackfinder/add_drone.dart';
 import 'package:frackfinder/home.dart';
 
 void main() => runApp(MyApp());
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (BuildContext context) => LoginPage(),
         '/home': (BuildContext context) => HomePage(),
+        '/add_drone': (BuildContext context) => AddDronePage(),
       },
     );
   }
