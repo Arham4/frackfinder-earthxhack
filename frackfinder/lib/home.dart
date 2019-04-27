@@ -112,10 +112,10 @@ class HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(
-                Icons.account_circle,
+                Icons.home,
                 color: Theme.of(context).primaryColor,
               ),
-              title: Text('Profile'),
+              title: Text('Home'),
               onTap: () => Navigator.pop(context),
             ),
             ListTile(
