@@ -1,26 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frackfinder/add_drone.dart';
-import 'package:frackfinder/home.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FrackFinder',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
-      routes: {
-        '/': (BuildContext context) => LoginPage(),
-        '/home': (BuildContext context) => HomePage(),
-        '/add_drone': (BuildContext context) => AddDronePage(),
-      },
-    );
-  }
-}
 
 class LoginPage extends StatelessWidget {
   @override
