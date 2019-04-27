@@ -104,9 +104,8 @@ class _PageState extends State<Page> {
   }
 
   void _navigateToNamed(String name) {
-    if (name == pageName) {
-      Navigator.pop(context);
-    } else {
+    Navigator.pop(context);
+    if (pageName != name) {
       Navigator.pushReplacementNamed(context, name);
     }
   }
