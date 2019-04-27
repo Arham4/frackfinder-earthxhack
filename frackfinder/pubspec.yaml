@@ -46,6 +46,7 @@ flutter:
    - images/logo.png
    - images/dummy_profile_picture.jpg
    - images/logo_text.png
+   - images/dummy_drone_view.jpg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
