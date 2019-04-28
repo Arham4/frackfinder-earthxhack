@@ -521,3 +521,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/dart,macos,python,android,windows,flutter,intellij,androidstudio,visualstudiocode
+
+# Application specific
+site_scorer/images/
