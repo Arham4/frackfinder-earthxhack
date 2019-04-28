@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-typedef void TextureViewCreatedCallback(TextureViewController controller);
+typedef void DroneViewCreatedCallback(DroneViewController controller);
 
-class TextureViewController {
-  MethodChannel _channel = new MethodChannel('textureview');
+class DroneViewController {
+  MethodChannel _channel = new MethodChannel('droneview');
 
   Future<void> loadUrl(String url) async {
     assert(url != null);
@@ -12,19 +12,19 @@ class TextureViewController {
   }
 }
 
-class TextureView extends StatefulWidget {
-  final TextureViewCreatedCallback onViewCreated;
+class DroneView extends StatefulWidget {
+  final DroneViewCreatedCallback onViewCreated;
 
-  TextureView({
+  DroneView({
     Key key,
     @required this.onViewCreated,
   });
 
   @override
-  _TextureViewState createState() => _TextureViewState();
+  _DroneViewState createState() => _DroneViewState();
 }
 
-class _TextureViewState extends State<TextureView> {
+class _DroneViewState extends State<DroneView> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,7 +35,7 @@ class _TextureViewState extends State<TextureView> {
           height: 300,
           decoration: BoxDecoration(color: Colors.blue),
           child: AndroidView(
-            viewType: 'textureview',
+            viewType: 'droneview',
             onPlatformViewCreated: onPlatformViewCreated,
             creationParamsCodec: const StandardMessageCodec(),
           ),
@@ -48,6 +48,6 @@ class _TextureViewState extends State<TextureView> {
     if (widget.onViewCreated == null) {
       return;
     }
-    widget.onViewCreated(new TextureViewController());
+    widget.onViewCreated(new DroneViewController());
   }
 }

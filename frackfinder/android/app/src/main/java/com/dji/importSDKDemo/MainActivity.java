@@ -34,11 +34,8 @@ import dji.common.error.DJISDKError;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
 import dji.sdk.sdkmanager.DJISDKManager;
-import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.platform.PlatformView;
 import io.flutter.plugins.GeneratedPluginRegistrant;
-import io.flutter.view.FlutterMain;
 
 public class MainActivity extends FlutterActivity implements PlatformView {
 
@@ -71,7 +68,7 @@ public class MainActivity extends FlutterActivity implements PlatformView {
         super.onCreate(savedInstanceState);
 
         GeneratedPluginRegistrant.registerWith(this);
-        TextureViewPlugin.registerWith(this);
+        DroneViewPlugin.registerWith(this);
 
         // When the compile and target version is higher than 22, please request the following permission at runtime to ensure the SDK works well.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

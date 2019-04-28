@@ -80,7 +80,7 @@ class LivestreamPageState extends State<LivestreamPage> {
     return Page(
       pageName: '/livestream/$id',
       body: Center(
-        child: TextureView(
+        child: DroneView(
           onViewCreated: (view) {
             print('so this created????');
           },

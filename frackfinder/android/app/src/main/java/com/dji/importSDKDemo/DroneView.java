@@ -9,19 +9,19 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.platform.PlatformView;
 
-public class TextureViewNative implements PlatformView, MethodChannel.MethodCallHandler {
+public class DroneView implements PlatformView, MethodChannel.MethodCallHandler {
 
     private final Context context;
     private final PluginRegistry.Registrar registrar;
     private final MethodChannel channel;
     private final TextureView textureView;
 
-    TextureViewNative(Context context, PluginRegistry.Registrar registrar) {
+    DroneView(Context context, PluginRegistry.Registrar registrar) {
         this.context = context;
         this.registrar = registrar;
         textureView = getTextureView(registrar);
 
-        channel = new MethodChannel(registrar.messenger(), "textureview");
+        channel = new MethodChannel(registrar.messenger(), "droneview");
         channel.setMethodCallHandler(this);
     }
 
