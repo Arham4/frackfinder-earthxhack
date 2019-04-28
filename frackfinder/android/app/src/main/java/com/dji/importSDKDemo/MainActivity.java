@@ -16,8 +16,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import dji.common.error.DJIError;
@@ -60,19 +58,11 @@ public class MainActivity extends FlutterActivity {
         GeneratedPluginRegistrant.registerWith(this);
         DroneViewPlugin.registerWith(this);
 
-        /*
-         * Starts the tasks for DJI on a separate thread so that the application can have a faster start time.
-         */
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    checkAndRequestPermissions();
-                }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkAndRequestPermissions();
+        }
 
-                djiHandler = new Handler(Looper.getMainLooper());
-            }
-        });
+        djiHandler = new Handler(Looper.getMainLooper());
     }
 
     /**
@@ -86,16 +76,7 @@ public class MainActivity extends FlutterActivity {
             }
         }
         if (missingPermission.isEmpty()) {
-            /*
-             * Start registration a few seconds later to allow the app to load faster.
-             */
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    startSDKRegistration();
-                }
-            }, 2500);
+            startSDKRegistration();
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            showToast("Need to grant the permissions!");
             ActivityCompat.requestPermissions(this, missingPermission.toArray(new String[0]), REQUEST_PERMISSION_CODE);
