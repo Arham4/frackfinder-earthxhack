@@ -12,15 +12,12 @@ import io.flutter.plugin.platform.PlatformView;
 public class DroneView implements PlatformView, MethodChannel.MethodCallHandler {
 
     private final Context context;
-    private final PluginRegistry.Registrar registrar;
     private final MethodChannel channel;
     private final TextureView textureView;
 
     DroneView(Context context, PluginRegistry.Registrar registrar) {
         this.context = context;
-        this.registrar = registrar;
         textureView = getTextureView(registrar);
-
         channel = new MethodChannel(registrar.messenger(), "droneview");
         channel.setMethodCallHandler(this);
     }

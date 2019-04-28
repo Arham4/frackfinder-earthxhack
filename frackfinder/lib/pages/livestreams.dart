@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frackfinder/page.dart';
-import 'package:frackfinder/textureview/texture_view_controller.dart';
+import 'package:frackfinder/droneview/drone_view_controller.dart';
 
 class LivestreamsPage extends StatelessWidget {
   static const int _droneCount = 5;

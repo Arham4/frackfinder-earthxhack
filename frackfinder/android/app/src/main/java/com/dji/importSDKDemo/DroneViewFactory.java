@@ -9,16 +9,16 @@ import io.flutter.plugin.platform.PlatformViewFactory;
 
 public class DroneViewFactory extends PlatformViewFactory {
 
-    private final PluginRegistry.Registrar mPluginRegistrar;
+    private final PluginRegistry.Registrar pluginRegistrar;
 
-    public DroneViewFactory(PluginRegistry.Registrar registrar) {
+    DroneViewFactory(PluginRegistry.Registrar registrar) {
         super(StandardMessageCodec.INSTANCE);
-        mPluginRegistrar = registrar;
+        pluginRegistrar = registrar;
     }
 
     @Override
     public PlatformView create(Context context, int i, Object o) {
-        return new DroneView(context, mPluginRegistrar);
+        return new DroneView(context, pluginRegistrar);
     }
 
 }

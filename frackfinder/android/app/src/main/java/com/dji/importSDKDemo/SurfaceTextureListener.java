@@ -21,8 +21,8 @@ import dji.sdk.camera.VideoFeeder;
 import dji.sdk.codec.DJICodecManager;
 
 public class SurfaceTextureListener implements TextureView.SurfaceTextureListener {
-
     private static final String TAG = SurfaceTextureListener.class.getName();
+
     private final Context context;
     private DJICodecManager mCodecManager = null;
     private VideoFeeder.VideoDataListener mReceivedVideoDataListener;
@@ -39,18 +39,6 @@ public class SurfaceTextureListener implements TextureView.SurfaceTextureListene
             public void onReceive(byte[] videoBuffer, int size) {
                 if (mCodecManager != null) {
                     mCodecManager.sendDataToDecoder(videoBuffer, size);
-                    counter[0]++;
-                    if (counter[0] == 1000) {
-                        mCodecManager.getBitmap(new DJICodecManager.OnGetBitmapListener() {
-                            @Override
-                            public void onGetBitmap(Bitmap bitmap) {
-                                if (bitmap != null) {
-                                    saveScreenshot("1", bitmap);
-                                }
-                            }
-                        });
-                        counter[0] = 0;
-                    }
                 }
             }
         };
@@ -60,8 +48,7 @@ public class SurfaceTextureListener implements TextureView.SurfaceTextureListene
         if (camera != null) {
             camera.setSystemStateCallback(new SystemState.Callback() {
                 @Override
-                public void onUpdate(SystemState cameraSystemState) {
-                }
+                public void onUpdate(SystemState cameraSystemState) { }
             });
         }
 
@@ -73,31 +60,27 @@ public class SurfaceTextureListener implements TextureView.SurfaceTextureListene
     }
 
     private void saveScreenshot(String name, Bitmap bitmap) {
-//        convertToImage(mVideoSurface.getBitmap());
-        convertToImage(bitmap, name);
-//        Toast.makeText(context, convertToImage(bitmap).getAbsolutePath(), Toast.LENGTH_LONG).show();
+//        saveImage(mVideoSurface.getBitmap());
+        saveImage(bitmap, name);
+//        Toast.makeText(context, saveImage(bitmap).getAbsolutePath(), Toast.LENGTH_LONG).show();
     }
 
-    private void convertToImage(Bitmap screenshot, String name) {
-        FileOutputStream fileOutputStream = null;
+    private void saveImage(Bitmap screenshot, String name) {
+        FileOutputStream fileOutputStream;
         File path = new File(Environment.getExternalStorageDirectory(), "Pictures");
-
 //        String uniqueID = UUID.randomUUID().toString();
-
         File file = new File(path, name + ".jpg");
         if (file.exists()) {
             Toast.makeText(context, "The file exists.", Toast.LENGTH_LONG).show();
             return;
         }
-
         try {
             fileOutputStream = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return;
         }
-
         screenshot.compress(Bitmap.CompressFormat.JPEG, 30, fileOutputStream);
-
         try {
             fileOutputStream.flush();
             fileOutputStream.close();
@@ -112,16 +95,6 @@ public class SurfaceTextureListener implements TextureView.SurfaceTextureListene
         if (mCodecManager == null) {
             mCodecManager = new DJICodecManager(context, surface, width, height);
         }
-        /*counter[0]++;
-        Toast.makeText(context, counter[0] + "", Toast.LENGTH_LONG).show();
-        if (counter[0] == 1000) {
-            mCodecManager.getBitmap(new DJICodecManager.OnGetBitmapListener() {
-                @Override
-                public void onGetBitmap(Bitmap bitmap) {
-                    saveScreenshot(bitmap);
-                }
-            });
-        }*/
     }
 
     @Override
@@ -136,11 +109,9 @@ public class SurfaceTextureListener implements TextureView.SurfaceTextureListene
             mCodecManager.cleanSurface();
             mCodecManager = null;
         }
-
         return false;
     }
 
     @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-    }
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) { }
 }

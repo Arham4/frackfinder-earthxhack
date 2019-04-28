@@ -2,8 +2,8 @@ package com.dji.importSDKDemo;
 
 import io.flutter.plugin.common.PluginRegistry;
 
-public final class DroneViewPlugin {
-    public static void registerWith(PluginRegistry registry) {
+final class DroneViewPlugin {
+    static void registerWith(PluginRegistry registry) {
         if (alreadyRegisteredWith(registry)) {
             return;
         }

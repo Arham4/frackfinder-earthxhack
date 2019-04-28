@@ -5,11 +5,6 @@ typedef void DroneViewCreatedCallback(DroneViewController controller);
 
 class DroneViewController {
   MethodChannel _channel = new MethodChannel('droneview');
-
-  Future<void> loadUrl(String url) async {
-    assert(url != null);
-    return _channel.invokeMethod('loadUrl', url);
-  }
 }
 
 class DroneView extends StatefulWidget {
