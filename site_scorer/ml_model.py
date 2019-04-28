@@ -18,7 +18,6 @@ x_test = []
 img = cv2.imread("images/" + str(num_images) + ".jpg")
 resized_image = cv2.resize(img, (100,100))
 x_test.append(resized_image)
-x_test = x_test[0]
 x_test = np.array(x_test)
 
 y_test = [num_images]
@@ -28,8 +27,8 @@ x_test = x_test.reshape(x_test.shape + (1,))
 
 clf = ImageClassifier(verbose=True)
 clf.fit(x_train, y_train, time_limit=2*60)
-
-y_pred = clf.predict(x_test)
-#clf.final_fit(x_train, y_train, x_test, y_test, retrain=False)
-#y = clf.evaluate(x_test, y_test)
-#print(y)
+'''
+clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
+y = clf.evaluate(x_test, y_test)
+clf.load_searcher().load_best_model().produce_keras_model().save('test_save.h5')
+'''
