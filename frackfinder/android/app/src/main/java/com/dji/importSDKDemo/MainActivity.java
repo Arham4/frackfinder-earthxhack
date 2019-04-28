@@ -1,18 +1,16 @@
 package com.dji.importSDKDemo;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.content.Intent;
-import io.flutter.app.FlutterActivity;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,15 +23,14 @@ import dji.common.error.DJISDKError;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
 import dji.sdk.sdkmanager.DJISDKManager;
+import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
-import io.flutter.view.FlutterMain;
 
 public class MainActivity extends FlutterActivity {
 
     private static final String TAG = MainActivity.class.getName();
     public static final String FLAG_CONNECTION_CHANGE = "dji_sdk_connection_change";
-    private static BaseProduct mProduct;
-    private Handler mHandler;
+    private Handler djiHandler;
 
     private static final String[] REQUIRED_PERMISSION_LIST = new String[]{
             Manifest.permission.VIBRATE,
@@ -59,14 +56,13 @@ public class MainActivity extends FlutterActivity {
         super.onCreate(savedInstanceState);
 
         GeneratedPluginRegistrant.registerWith(this);
+        DroneViewPlugin.registerWith(this);
 
-        // When the compile and target version is higher than 22, please request the following permission at runtime to ensure the SDK works well.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkAndRequestPermissions();
         }
 
-        //Initialize DJI SDK Manager
-        mHandler = new Handler(Looper.getMainLooper());
+        djiHandler = new Handler(Looper.getMainLooper());
     }
 
     /**
@@ -74,20 +70,16 @@ public class MainActivity extends FlutterActivity {
      * requests runtime permission if needed.
      */
     private void checkAndRequestPermissions() {
-        // Check for permissions
         for (String eachPermission : REQUIRED_PERMISSION_LIST) {
             if (ContextCompat.checkSelfPermission(this, eachPermission) != PackageManager.PERMISSION_GRANTED) {
                 missingPermission.add(eachPermission);
             }
         }
-        // Request for missing permissions
         if (missingPermission.isEmpty()) {
             startSDKRegistration();
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            showToast("Need to grant the permissions!");
-            ActivityCompat.requestPermissions(this,
-                    missingPermission.toArray(new String[missingPermission.size()]),
-                    REQUEST_PERMISSION_CODE);
+//            showToast("Need to grant the permissions!");
+            ActivityCompat.requestPermissions(this, missingPermission.toArray(new String[0]), REQUEST_PERMISSION_CODE);
         }
 
     }
@@ -96,10 +88,7 @@ public class MainActivity extends FlutterActivity {
      * Result of runtime permission request
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        Toast.makeText(this, "plsssss5", Toast.LENGTH_LONG).show();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // Check for granted permission and remove from missing list
         if (requestCode == REQUEST_PERMISSION_CODE) {
@@ -113,7 +102,7 @@ public class MainActivity extends FlutterActivity {
         if (missingPermission.isEmpty()) {
             startSDKRegistration();
         } else {
-            showToast("Missing permissions!!!");
+//            showToast("Missing permissions!!!");
         }
     }
 
@@ -122,15 +111,14 @@ public class MainActivity extends FlutterActivity {
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    showToast("registering, pls wait...");
                     DJISDKManager.getInstance().registerApp(MainActivity.this.getApplicationContext(), new DJISDKManager.SDKManagerCallback() {
                         @Override
                         public void onRegister(DJIError djiError) {
                             if (djiError == DJISDKError.REGISTRATION_SUCCESS) {
-                                showToast("Register Success");
                                 DJISDKManager.getInstance().startConnectionToProduct();
+//                                showToast("Register success");
                             } else {
-                                showToast("Register sdk fails, please check the bundle id and network connection!");
+//                                showToast("Register sdk fails, please check the bundle id and network connection!");
                             }
                             Log.v(TAG, djiError.getDescription());
                         }
@@ -138,24 +126,21 @@ public class MainActivity extends FlutterActivity {
                         @Override
                         public void onProductDisconnect() {
                             Log.d(TAG, "onProductDisconnect");
-                            showToast("Product Disconnected");
+//                            showToast("Product Disconnected");
                             notifyStatusChange();
-
                         }
+
                         @Override
                         public void onProductConnect(BaseProduct baseProduct) {
                             Log.d(TAG, String.format("onProductConnect newProduct:%s", baseProduct));
-                            showToast("Product Connected");
+//                            showToast("Product Connected");
                             notifyStatusChange();
-
                         }
-                        @Override
-                        public void onComponentChange(BaseProduct.ComponentKey componentKey, BaseComponent oldComponent,
-                                                      BaseComponent newComponent) {
 
+                        @Override
+                        public void onComponentChange(BaseProduct.ComponentKey componentKey, BaseComponent oldComponent, BaseComponent newComponent) {
                             if (newComponent != null) {
                                 newComponent.setComponentListener(new BaseComponent.ComponentListener() {
-
                                     @Override
                                     public void onConnectivityChange(boolean isConnected) {
                                         Log.d(TAG, "onComponentConnectivityChanged: " + isConnected);
@@ -163,14 +148,8 @@ public class MainActivity extends FlutterActivity {
                                     }
                                 });
                             }
-                            Log.d(TAG,
-                                    String.format("onComponentChange key:%s, oldComponent:%s, newComponent:%s",
-                                            componentKey,
-                                            oldComponent,
-                                            newComponent));
-
+                            Log.d(TAG, String.format("onComponentChange key:%s, oldComponent:%s, newComponent:%s", componentKey, oldComponent, newComponent));
                         }
-
                     });
                 }
             });
@@ -178,8 +157,8 @@ public class MainActivity extends FlutterActivity {
     }
 
     private void notifyStatusChange() {
-        mHandler.removeCallbacks(updateRunnable);
-        mHandler.postDelayed(updateRunnable, 500);
+        djiHandler.removeCallbacks(updateRunnable);
+        djiHandler.postDelayed(updateRunnable, 500);
     }
 
     private Runnable updateRunnable = new Runnable() {
@@ -191,16 +170,13 @@ public class MainActivity extends FlutterActivity {
         }
     };
 
-    private void showToast(final String toastMsg) {
-
+    private void showToast(final String message) {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
         });
-
     }
-
 }
