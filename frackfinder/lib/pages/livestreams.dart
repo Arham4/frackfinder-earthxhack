@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frackfinder/page.dart';
+import 'package:frackfinder/textureview/texture_view_controller.dart';
 
 class LivestreamsPage extends StatelessWidget {
   static const int _droneCount = 5;
@@ -79,7 +80,12 @@ class LivestreamPageState extends State<LivestreamPage> {
     return Page(
       pageName: '/livestream/$id',
       body: Center(
-        child: Text('Hello from drone $id'),
+        child: TextureView(
+          onViewCreated: (view) {
+            print('so this created????');
+          },
+        ),
+//        child: Text('Hello from drone $id'),
       ),
     );
   }
