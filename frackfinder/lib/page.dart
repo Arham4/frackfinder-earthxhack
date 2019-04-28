@@ -67,14 +67,6 @@ class _PageState extends State<Page> {
             ),
             ListTile(
               leading: Icon(
-                Icons.home,
-                color: Theme.of(context).primaryColor,
-              ),
-              title: Text('Home'),
-              onTap: () => _navigateToNamed('/home'),
-            ),
-            ListTile(
-              leading: Icon(
                 Icons.videocam,
                 color: Theme.of(context).primaryColor,
               ),
@@ -87,7 +79,7 @@ class _PageState extends State<Page> {
                 color: Theme.of(context).primaryColor,
               ),
               title: Text('Site Library'),
-              onTap: () => _navigateToNamed('/library'),
+              onTap: () => _navigateToNamed('/site_library'),
             ),
             ListTile(
               leading: Icon(

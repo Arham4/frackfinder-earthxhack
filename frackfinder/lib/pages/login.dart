@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed('/home');
+                  Navigator.of(context).pushReplacementNamed('/livestreams');
                 },
                 child: Text('Login'),
                 textColor: Colors.white,

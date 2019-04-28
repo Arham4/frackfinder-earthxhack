@@ -48,7 +48,8 @@ public class SurfaceTextureListener implements TextureView.SurfaceTextureListene
         if (camera != null) {
             camera.setSystemStateCallback(new SystemState.Callback() {
                 @Override
-                public void onUpdate(SystemState cameraSystemState) { }
+                public void onUpdate(SystemState cameraSystemState) {
+                }
             });
         }
 
@@ -113,5 +114,6 @@ public class SurfaceTextureListener implements TextureView.SurfaceTextureListene
     }
 
     @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surface) { }
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+    }
 }

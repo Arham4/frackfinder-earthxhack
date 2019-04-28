@@ -22,20 +22,17 @@ class DroneView extends StatefulWidget {
 class _DroneViewState extends State<DroneView> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text("test"),
-        Container(
-          width: 300,
-          height: 300,
-          decoration: BoxDecoration(color: Colors.blue),
-          child: AndroidView(
-            viewType: 'droneview',
-            onPlatformViewCreated: onPlatformViewCreated,
-            creationParamsCodec: const StandardMessageCodec(),
-          ),
-        )
-      ],
+    return Center(
+      child: Container(
+        width: 400,
+        height: 250,
+        decoration: BoxDecoration(color: Colors.blue),
+        child: AndroidView(
+          viewType: 'droneview',
+          onPlatformViewCreated: onPlatformViewCreated,
+          creationParamsCodec: const StandardMessageCodec(),
+        ),
+      ),
     );
   }
 
