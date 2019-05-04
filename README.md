@@ -20,5 +20,12 @@ Getting the live-stream to work and implementing a machine learning model for sc
 ## What we learned
 Drones are amazingly powerful pieces of technology that need to be applied in so many more aspects of our lives!
 
-## What's next for Frackfinder
+## What's next for FrackFinder
 The biggest next step for FrackFinder is to incorporate real industry data into the product. Currently, the dataset was curated by the creators (us!) and was thus not professionally validated. With a company dataset, we will have an even more robust model. We also want to make the drones autonomous. One other cool thing we want to do is integrate Virtual Reality into our project so the user can watch the drone live-stream through a VR headset.
+
+![](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/803/978/datas/gallery.jpg)
+![](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/803/971/datas/gallery.jpg)
+![](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/803/961/datas/gallery.jpg)
+![](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/803/962/datas/gallery.jpg)
+![](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/803/959/datas/gallery.jpg)
+![](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/803/957/datas/gallery.jpg)
