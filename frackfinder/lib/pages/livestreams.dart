@@ -80,12 +80,26 @@ class LivestreamPageState extends State<LivestreamPage> {
     return Page(
       pageName: '/livestream/$id',
       body: Center(
-        child: DroneView(
-          onViewCreated: (view) {
-            print('so this created????');
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            DroneView(
+              onViewCreated: (view) {},
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RaisedButton(
+              child: Text(
+                "Take Picture",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Theme.of(context).primaryColor,
+              onPressed: () {},
+            )
+          ],
         ),
-//        child: Text('Hello from drone $id'),
       ),
     );
   }

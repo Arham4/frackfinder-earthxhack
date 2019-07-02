@@ -155,7 +155,10 @@ class SitePage extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushNamed(context, '/livestream/1');
                         },
-                        child: Text("Go to origin drone"),
+                        child: Text(
+                          "Go to origin drone",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     )
                   ],

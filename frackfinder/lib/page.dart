@@ -36,11 +36,17 @@ class _PageState extends State<Page> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.menu),
+              icon: Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
               onPressed: _showMenu,
             ),
             IconButton(
-              icon: Icon(Icons.search),
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
               onPressed: () {},
             ),
           ],
@@ -59,7 +65,7 @@ class _PageState extends State<Page> {
           children: <Widget>[
             ProfileWidget(
               Image.asset("images/dummy_profile_picture.jpg"),
-              'Vicki',
+              'John Appleseed',
               MainAxisAlignment.start,
               fillerWidget: SizedBox(
                 width: 10,

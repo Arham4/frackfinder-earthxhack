@@ -41,7 +41,7 @@ class AddDronePage extends StatelessWidget {
           ),
           RaisedButton(
             color: Theme.of(context).primaryColor,
-            child: Text('Pair Drone'),
+            child: Text('Pair Drone', style: TextStyle(color: Colors.white),),
             onPressed: () {},
           )
         ],
